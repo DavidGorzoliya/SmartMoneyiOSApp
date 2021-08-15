@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -26,9 +26,13 @@
 		946449FF26C2AC0500630589 /* WeeksOfWealthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946449FE26C2AC0500630589 /* WeeksOfWealthViewController.swift */; };
 		94644A0126C2AD0A00630589 /* WeeksOfWealthCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94644A0026C2AD0A00630589 /* WeeksOfWealthCollectionViewCell.swift */; };
 		94644A1326C2F62D00630589 /* UIView+Shadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94644A1226C2F62D00630589 /* UIView+Shadow.swift */; };
+		94905A7226C9439800DDFAFC /* BackendManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94905A7126C9439800DDFAFC /* BackendManager.swift */; };
+		A3A8EA7420A33B2D01E04A33 /* Pods_SmartMoney.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21E4E9998DBE1C6239D4D0BF /* Pods_SmartMoney.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		21E4E9998DBE1C6239D4D0BF /* Pods_SmartMoney.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SmartMoney.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5A46ED3E2D01931E084E9C77 /* Pods-SmartMoney.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartMoney.release.xcconfig"; path = "Target Support Files/Pods-SmartMoney/Pods-SmartMoney.release.xcconfig"; sourceTree = "<group>"; };
 		9438305A26C8318700E64FFF /* ObjectiveTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectiveTableViewCell.swift; sourceTree = "<group>"; };
 		9438305C26C83BB500E64FFF /* Deposit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Deposit.swift; sourceTree = "<group>"; };
 		9438305E26C85D6100E64FFF /* TravelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelViewController.swift; sourceTree = "<group>"; };
@@ -50,6 +54,8 @@
 		946449FE26C2AC0500630589 /* WeeksOfWealthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeksOfWealthViewController.swift; sourceTree = "<group>"; };
 		94644A0026C2AD0A00630589 /* WeeksOfWealthCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeksOfWealthCollectionViewCell.swift; sourceTree = "<group>"; };
 		94644A1226C2F62D00630589 /* UIView+Shadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Shadow.swift"; sourceTree = "<group>"; };
+		94905A7126C9439800DDFAFC /* BackendManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackendManager.swift; sourceTree = "<group>"; };
+		FDBBB803ABFE7F784969A298 /* Pods-SmartMoney.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartMoney.debug.xcconfig"; path = "Target Support Files/Pods-SmartMoney/Pods-SmartMoney.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,12 +63,21 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A3A8EA7420A33B2D01E04A33 /* Pods_SmartMoney.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		446CCC72E86B266060364EEE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				21E4E9998DBE1C6239D4D0BF /* Pods_SmartMoney.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		9438306626C92DEC00E64FFF /* Travel */ = {
 			isa = PBXGroup;
 			children = (
@@ -101,6 +116,8 @@
 			children = (
 				946449D626C1EF1300630589 /* SmartMoney */,
 				946449D526C1EF1300630589 /* Products */,
+				A7D2A4F5095AD0D1CA7BD005 /* Pods */,
+				446CCC72E86B266060364EEE /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -129,6 +146,7 @@
 			isa = PBXGroup;
 			children = (
 				946449EC26C1EFBA00630589 /* Modules */,
+				94905A7026C9437F00DDFAFC /* Services */,
 				946449F926C288C400630589 /* Utilities */,
 			);
 			path = Sources;
@@ -290,6 +308,23 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		94905A7026C9437F00DDFAFC /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				94905A7126C9439800DDFAFC /* BackendManager.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		A7D2A4F5095AD0D1CA7BD005 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				FDBBB803ABFE7F784969A298 /* Pods-SmartMoney.debug.xcconfig */,
+				5A46ED3E2D01931E084E9C77 /* Pods-SmartMoney.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -297,9 +332,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 946449E826C1EF1800630589 /* Build configuration list for PBXNativeTarget "SmartMoney" */;
 			buildPhases = (
+				FF62AD14CBEC30750C0DE781 /* [CP] Check Pods Manifest.lock */,
 				946449D026C1EF1300630589 /* Sources */,
 				946449D126C1EF1300630589 /* Frameworks */,
 				946449D226C1EF1300630589 /* Resources */,
+				67958DA38E8C66C988E4E7CC /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -354,6 +391,48 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		67958DA38E8C66C988E4E7CC /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SmartMoney/Pods-SmartMoney-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SmartMoney/Pods-SmartMoney-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SmartMoney/Pods-SmartMoney-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FF62AD14CBEC30750C0DE781 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-SmartMoney-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		946449D026C1EF1300630589 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -365,6 +444,7 @@
 				9438305F26C85D6100E64FFF /* TravelViewController.swift in Sources */,
 				94644A0126C2AD0A00630589 /* WeeksOfWealthCollectionViewCell.swift in Sources */,
 				9438305D26C83BB500E64FFF /* Deposit.swift in Sources */,
+				94905A7226C9439800DDFAFC /* BackendManager.swift in Sources */,
 				946449FD26C290A500630589 /* UIVIew+AutoLayout.swift in Sources */,
 				94644A1326C2F62D00630589 /* UIView+Shadow.swift in Sources */,
 				946449DA26C1EF1300630589 /* SceneDelegate.swift in Sources */,
@@ -511,6 +591,7 @@
 		};
 		946449E926C1EF1800630589 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FDBBB803ABFE7F784969A298 /* Pods-SmartMoney.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -530,6 +611,7 @@
 		};
 		946449EA26C1EF1800630589 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5A46ED3E2D01931E084E9C77 /* Pods-SmartMoney.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
