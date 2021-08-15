@@ -6,15 +6,9 @@
 //
 
 import Foundation
+import RealmSwift
 
-class Deposit {
-    
-    let amount: Int
-    var completed: Bool
-    
-    init(amount: Int, completed: Bool = false) {
-        self.amount = amount
-        self.completed = completed
-    }
-    
+class Deposit: Object {
+    @objc dynamic var amount: Int = 0
+    @objc dynamic var completed: Bool = false
 }

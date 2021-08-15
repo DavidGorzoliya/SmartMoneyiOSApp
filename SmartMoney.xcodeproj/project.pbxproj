@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -26,6 +26,7 @@
 		946449FF26C2AC0500630589 /* WeeksOfWealthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946449FE26C2AC0500630589 /* WeeksOfWealthViewController.swift */; };
 		94644A0126C2AD0A00630589 /* WeeksOfWealthCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94644A0026C2AD0A00630589 /* WeeksOfWealthCollectionViewCell.swift */; };
 		94644A1326C2F62D00630589 /* UIView+Shadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94644A1226C2F62D00630589 /* UIView+Shadow.swift */; };
+		94905A7226C9439800DDFAFC /* BackendManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94905A7126C9439800DDFAFC /* BackendManager.swift */; };
 		A3A8EA7420A33B2D01E04A33 /* Pods_SmartMoney.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21E4E9998DBE1C6239D4D0BF /* Pods_SmartMoney.framework */; };
 /* End PBXBuildFile section */
 
@@ -53,6 +54,7 @@
 		946449FE26C2AC0500630589 /* WeeksOfWealthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeksOfWealthViewController.swift; sourceTree = "<group>"; };
 		94644A0026C2AD0A00630589 /* WeeksOfWealthCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeksOfWealthCollectionViewCell.swift; sourceTree = "<group>"; };
 		94644A1226C2F62D00630589 /* UIView+Shadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Shadow.swift"; sourceTree = "<group>"; };
+		94905A7126C9439800DDFAFC /* BackendManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackendManager.swift; sourceTree = "<group>"; };
 		FDBBB803ABFE7F784969A298 /* Pods-SmartMoney.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartMoney.debug.xcconfig"; path = "Target Support Files/Pods-SmartMoney/Pods-SmartMoney.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -144,6 +146,7 @@
 			isa = PBXGroup;
 			children = (
 				946449EC26C1EFBA00630589 /* Modules */,
+				94905A7026C9437F00DDFAFC /* Services */,
 				946449F926C288C400630589 /* Utilities */,
 			);
 			path = Sources;
@@ -305,13 +308,20 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		94905A7026C9437F00DDFAFC /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				94905A7126C9439800DDFAFC /* BackendManager.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
 		A7D2A4F5095AD0D1CA7BD005 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
 				FDBBB803ABFE7F784969A298 /* Pods-SmartMoney.debug.xcconfig */,
 				5A46ED3E2D01931E084E9C77 /* Pods-SmartMoney.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -434,6 +444,7 @@
 				9438305F26C85D6100E64FFF /* TravelViewController.swift in Sources */,
 				94644A0126C2AD0A00630589 /* WeeksOfWealthCollectionViewCell.swift in Sources */,
 				9438305D26C83BB500E64FFF /* Deposit.swift in Sources */,
+				94905A7226C9439800DDFAFC /* BackendManager.swift in Sources */,
 				946449FD26C290A500630589 /* UIVIew+AutoLayout.swift in Sources */,
 				94644A1326C2F62D00630589 /* UIView+Shadow.swift in Sources */,
 				946449DA26C1EF1300630589 /* SceneDelegate.swift in Sources */,

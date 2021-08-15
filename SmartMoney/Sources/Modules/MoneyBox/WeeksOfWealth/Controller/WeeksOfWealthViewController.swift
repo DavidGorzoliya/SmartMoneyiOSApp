@@ -11,13 +11,7 @@ private let cellIdentifier = "cell"
 
 class WeeksOfWealthViewController: UIViewController {
     
-    private var depositAmountArray: [Deposit] = {
-        var array = [Deposit]()
-        for i in stride(from: 100, through: 5700, by: 100) {
-            array.append(Deposit(amount: i))
-        }
-        return array
-    }()
+    private var depositAmountArray = BackendManager.shared.getAllDeposits()
     
     private let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -61,8 +55,19 @@ extension WeeksOfWealthViewController: UICollectionViewDataSource, UICollectionV
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath) as? WeeksOfWealthCollectionViewCell else {
             return UICollectionViewCell()
         }
+        let deposit = depositAmountArray[indexPath.row]
+        if deposit.completed {
+            let attributeString: NSMutableAttributedString =  NSMutableAttributedString(string: String(deposit.amount))
+            attributeString.addAttribute(NSAttributedString.Key.strikethroughStyle, value: 2, range: NSMakeRange(0, attributeString.length))
 
-        cell.amountLabel.text = String(depositAmountArray[indexPath.row].amount)
+            cell.amountLabel.attributedText = attributeString
+            cell.artworkView.backgroundColor = .green
+        } else {
+            cell.amountLabel.attributedText = nil
+            cell.amountLabel.text = String(deposit.amount)
+            cell.artworkView.backgroundColor = .white
+        }
+        cell.delegate = self
 
         return cell
     }
@@ -78,10 +83,18 @@ extension WeeksOfWealthViewController: UICollectionViewDelegateFlowLayout {
 
 extension WeeksOfWealthViewController: WeeksOfWealthCollectionViewCellDelegate {
     func weeksOfWealthCollectionViewCellTapped(_ cell: WeeksOfWealthCollectionViewCell) {
-        let attributeString: NSMutableAttributedString =  NSMutableAttributedString(string: cell.amountLabel.text!)
-        attributeString.addAttribute(NSAttributedString.Key.strikethroughStyle, value: 2, range: NSMakeRange(0, attributeString.length))
+        let deposit = BackendManager.shared.modifyDeposit(with: Int(cell.amountLabel.text!)!)
 
-        cell.amountLabel.attributedText = attributeString
-        cell.artworkView.backgroundColor = .green
+        if deposit.completed {
+            let attributeString: NSMutableAttributedString =  NSMutableAttributedString(string: cell.amountLabel.text!)
+            attributeString.addAttribute(NSAttributedString.Key.strikethroughStyle, value: 2, range: NSMakeRange(0, attributeString.length))
+
+            cell.amountLabel.attributedText = attributeString
+            cell.artworkView.backgroundColor = .green
+        } else {
+            cell.amountLabel.attributedText = nil
+            cell.amountLabel.text = String(deposit.amount)
+            cell.artworkView.backgroundColor = .white
+        }
     }
 }
