@@ -11,6 +11,7 @@ private let cellIdentifier = "cell"
 
 class WeeksOfWealthViewController: UIViewController {
     
+    private lazy var infoBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "info.circle.fill"), style: .plain, target: self, action: #selector(textFildBarButtomItem))
     private var depositAmountArray = BackendManager.shared.getAllDeposits()
     
     private let collectionView: UICollectionView = {
@@ -37,12 +38,37 @@ class WeeksOfWealthViewController: UIViewController {
     private func layout() {
         view.addSubview(collectionView)
         collectionView.pinToSuperviewSafeArea()
+        navigationItem.rightBarButtonItem = infoBarButtonItem
     }
 
     private func setupCollectionView() {
         collectionView.register(WeeksOfWealthCollectionViewCell.self, forCellWithReuseIdentifier: cellIdentifier)
         collectionView.delegate = self
         collectionView.dataSource = self
+    }
+
+    @objc private func textFildBarButtomItem() {
+        let vc = UIViewController()
+        let navVc = UINavigationController(rootViewController: vc)
+
+        vc.navigationController?.navigationBar.prefersLargeTitles = true
+        vc.title = "Правила игры"
+
+        let gameDescriptionLabel = UILabel()
+        gameDescriptionLabel.numberOfLines = 0
+        gameDescriptionLabel.font = UIFont.boldSystemFont(ofSize: gameDescriptionLabel.font.pointSize)
+        gameDescriptionLabel.text = "- 1 раз в неделю выбирай любую ячейку и пополняй копилку номиналом ячейки! \n\n- Игра пройдена, когда все ячейки закрашены!"
+
+        vc.view.addSubview(gameDescriptionLabel)
+        gameDescriptionLabel.translatesAutoresizingMaskIntoConstraints = false
+        gameDescriptionLabel.topAnchor.constraint(equalTo: vc.view.safeAreaLayoutGuide.topAnchor, constant: 12).isActive = true
+        gameDescriptionLabel.leftAnchor.constraint(equalTo: vc.view.leftAnchor, constant: 12).isActive = true
+        gameDescriptionLabel.rightAnchor.constraint(equalTo: vc.view.rightAnchor, constant: -12).isActive = true
+
+        navVc.modalPresentationStyle = .pageSheet
+        vc.view.backgroundColor = .white
+
+        present(navVc, animated: true)
     }
 }
 
