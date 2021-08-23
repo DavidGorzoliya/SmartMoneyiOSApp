@@ -7,17 +7,36 @@
 
 import UIKit
 
+protocol ObjectiveTableViewCellDelegate: AnyObject {
+    func objectiveTableViewCellOnSubmit(_ cell: ObjectiveTableViewCell )
+}
+
 class ObjectiveTableViewCell: UITableViewCell {
     
-    let objectiveItemImageView: UIImageView = {
-        let objectiveItemImageView = UIImageView()
-        objectiveItemImageView.backgroundColor = .darkGray
-        return objectiveItemImageView
+    private lazy var displayLink = CADisplayLink(target: self, selector: #selector(handliUpdate))
+    weak var delegate: ObjectiveTableViewCellDelegate?
+    
+    private var counter = 0
+    private var price = 0
+    
+    let countingLabel: UILabel = {
+        let countingLabel = UILabel()
+        countingLabel.text = "0"
+        
+        return countingLabel
     }()
+    
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         layout()
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(onTap))
+        contentView.addGestureRecognizer(tap)
+    }
+    
+    @objc func onTap() {
+        delegate?.objectiveTableViewCellOnSubmit(self)
     }
     
     @available(*, unavailable)
@@ -25,12 +44,25 @@ class ObjectiveTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func layout() {
-        contentView.addSubview(objectiveItemImageView)
-        objectiveItemImageView.translatesAutoresizingMaskIntoConstraints = false
-        objectiveItemImageView.heightAnchor.constraint(equalToConstant: 100).isActive = true
-        objectiveItemImageView.widthAnchor.constraint(equalToConstant: 100).isActive = true
-        objectiveItemImageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
-        objectiveItemImageView.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -20).isActive = true
+    private func layout() {
+        contentView.addSubview(countingLabel)
+        countingLabel.translatesAutoresizingMaskIntoConstraints = false
+        countingLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
+        countingLabel.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -12).isActive = true
+    }
+    
+    private func prepareDisplayLink() {
+        displayLink.add(to: .main, forMode: .default)
+    
+    }
+    
+    @objc func handliUpdate() {
+        if counter >= BackendManager.shared.balance.amount {
+            displayLink.isPaused = true
+            countingLabel.text = "\(BackendManager.shared.balance.amount)"
+        } else {
+            counter += 100
+            countingLabel.text = "\(counter)"
+        }
     }
 }

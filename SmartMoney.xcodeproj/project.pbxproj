@@ -9,10 +9,6 @@
 /* Begin PBXBuildFile section */
 		9438305B26C8318700E64FFF /* ObjectiveTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9438305A26C8318700E64FFF /* ObjectiveTableViewCell.swift */; };
 		9438305D26C83BB500E64FFF /* Deposit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9438305C26C83BB500E64FFF /* Deposit.swift */; };
-		9438305F26C85D6100E64FFF /* TravelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9438305E26C85D6100E64FFF /* TravelViewController.swift */; };
-		9438306126C85D9300E64FFF /* StudyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9438306026C85D9300E64FFF /* StudyViewController.swift */; };
-		9438306326C85DC300E64FFF /* PurchaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9438306226C85DC300E64FFF /* PurchaseViewController.swift */; };
-		9438306526C8625300E64FFF /* TravelViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9438306426C8625300E64FFF /* TravelViewCell.swift */; };
 		946449D826C1EF1300630589 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946449D726C1EF1300630589 /* AppDelegate.swift */; };
 		946449DA26C1EF1300630589 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946449D926C1EF1300630589 /* SceneDelegate.swift */; };
 		946449E126C1EF1800630589 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 946449E026C1EF1800630589 /* Assets.xcassets */; };
@@ -27,6 +23,11 @@
 		94644A0126C2AD0A00630589 /* WeeksOfWealthCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94644A0026C2AD0A00630589 /* WeeksOfWealthCollectionViewCell.swift */; };
 		94644A1326C2F62D00630589 /* UIView+Shadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94644A1226C2F62D00630589 /* UIView+Shadow.swift */; };
 		94905A7226C9439800DDFAFC /* BackendManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94905A7126C9439800DDFAFC /* BackendManager.swift */; };
+		94905A7C26CCDC2800DDFAFC /* ChildrensPiggyBankViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94905A7B26CCDC2800DDFAFC /* ChildrensPiggyBankViewController.swift */; };
+		94905A8326CCDE9700DDFAFC /* ChildrensPiggyBankCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94905A8226CCDE9700DDFAFC /* ChildrensPiggyBankCollectionViewCell.swift */; };
+		94905A9A26CDBE7C00DDFAFC /* Balance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94905A9926CDBE7C00DDFAFC /* Balance.swift */; };
+		94905A9C26CE687000DDFAFC /* Objective.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94905A9B26CE687000DDFAFC /* Objective.swift */; };
+		94A0C38226D3CF3F0005E3F5 /* BalanceWeeksOfWealth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A0C38126D3CF3F0005E3F5 /* BalanceWeeksOfWealth.swift */; };
 		A3A8EA7420A33B2D01E04A33 /* Pods_SmartMoney.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21E4E9998DBE1C6239D4D0BF /* Pods_SmartMoney.framework */; };
 /* End PBXBuildFile section */
 
@@ -35,10 +36,6 @@
 		5A46ED3E2D01931E084E9C77 /* Pods-SmartMoney.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartMoney.release.xcconfig"; path = "Target Support Files/Pods-SmartMoney/Pods-SmartMoney.release.xcconfig"; sourceTree = "<group>"; };
 		9438305A26C8318700E64FFF /* ObjectiveTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectiveTableViewCell.swift; sourceTree = "<group>"; };
 		9438305C26C83BB500E64FFF /* Deposit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Deposit.swift; sourceTree = "<group>"; };
-		9438305E26C85D6100E64FFF /* TravelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelViewController.swift; sourceTree = "<group>"; };
-		9438306026C85D9300E64FFF /* StudyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyViewController.swift; sourceTree = "<group>"; };
-		9438306226C85DC300E64FFF /* PurchaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseViewController.swift; sourceTree = "<group>"; };
-		9438306426C8625300E64FFF /* TravelViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelViewCell.swift; sourceTree = "<group>"; };
 		946449D426C1EF1300630589 /* SmartMoney.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SmartMoney.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		946449D726C1EF1300630589 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		946449D926C1EF1300630589 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -55,6 +52,11 @@
 		94644A0026C2AD0A00630589 /* WeeksOfWealthCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeksOfWealthCollectionViewCell.swift; sourceTree = "<group>"; };
 		94644A1226C2F62D00630589 /* UIView+Shadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Shadow.swift"; sourceTree = "<group>"; };
 		94905A7126C9439800DDFAFC /* BackendManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackendManager.swift; sourceTree = "<group>"; };
+		94905A7B26CCDC2800DDFAFC /* ChildrensPiggyBankViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildrensPiggyBankViewController.swift; sourceTree = "<group>"; };
+		94905A8226CCDE9700DDFAFC /* ChildrensPiggyBankCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildrensPiggyBankCollectionViewCell.swift; sourceTree = "<group>"; };
+		94905A9926CDBE7C00DDFAFC /* Balance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Balance.swift; sourceTree = "<group>"; };
+		94905A9B26CE687000DDFAFC /* Objective.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Objective.swift; sourceTree = "<group>"; };
+		94A0C38126D3CF3F0005E3F5 /* BalanceWeeksOfWealth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceWeeksOfWealth.swift; sourceTree = "<group>"; };
 		FDBBB803ABFE7F784969A298 /* Pods-SmartMoney.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartMoney.debug.xcconfig"; path = "Target Support Files/Pods-SmartMoney/Pods-SmartMoney.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -76,39 +78,6 @@
 				21E4E9998DBE1C6239D4D0BF /* Pods_SmartMoney.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		9438306626C92DEC00E64FFF /* Travel */ = {
-			isa = PBXGroup;
-			children = (
-				9438306A26C92E2100E64FFF /* Controller */,
-				9438306926C92E1700E64FFF /* View */,
-				9438306826C92E0D00E64FFF /* Model */,
-			);
-			path = Travel;
-			sourceTree = "<group>";
-		};
-		9438306826C92E0D00E64FFF /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		9438306926C92E1700E64FFF /* View */ = {
-			isa = PBXGroup;
-			children = (
-				9438306426C8625300E64FFF /* TravelViewCell.swift */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		9438306A26C92E2100E64FFF /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				9438305E26C85D6100E64FFF /* TravelViewController.swift */,
-			);
-			path = Controller;
 			sourceTree = "<group>";
 		};
 		946449CB26C1EF1300630589 = {
@@ -189,7 +158,6 @@
 				94644A0E26C2F0DE00630589 /* Model */,
 				94644A0D26C2F0DB00630589 /* View */,
 				94644A0C26C2F0D700630589 /* Controller */,
-				9438306626C92DEC00E64FFF /* Travel */,
 			);
 			path = Objective;
 			sourceTree = "<group>";
@@ -197,6 +165,7 @@
 		94644A0426C2F03A00630589 /* MoneyBox */ = {
 			isa = PBXGroup;
 			children = (
+				94905A7A26CCDBCB00DDFAFC /* ChildrensPiggyBank */,
 				94644A0726C2F05F00630589 /* Model */,
 				94644A0626C2F05200630589 /* View */,
 				94644A0526C2F04D00630589 /* Controller */,
@@ -257,6 +226,7 @@
 			isa = PBXGroup;
 			children = (
 				9438305C26C83BB500E64FFF /* Deposit.swift */,
+				94A0C38126D3CF3F0005E3F5 /* BalanceWeeksOfWealth.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -265,8 +235,6 @@
 			isa = PBXGroup;
 			children = (
 				946449F226C1F8C400630589 /* ObjectiveViewController.swift */,
-				9438306026C85D9300E64FFF /* StudyViewController.swift */,
-				9438306226C85DC300E64FFF /* PurchaseViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -282,6 +250,7 @@
 		94644A0E26C2F0DE00630589 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				94905A9B26CE687000DDFAFC /* Objective.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -304,6 +273,7 @@
 		94644A1126C2F0ED00630589 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				94905A9926CDBE7C00DDFAFC /* Balance.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -314,6 +284,39 @@
 				94905A7126C9439800DDFAFC /* BackendManager.swift */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		94905A7A26CCDBCB00DDFAFC /* ChildrensPiggyBank */ = {
+			isa = PBXGroup;
+			children = (
+				94905A8126CCDDE700DDFAFC /* Model */,
+				94905A8026CCDDE000DDFAFC /* View */,
+				94905A7E26CCDDCA00DDFAFC /* Controller */,
+			);
+			path = ChildrensPiggyBank;
+			sourceTree = "<group>";
+		};
+		94905A7E26CCDDCA00DDFAFC /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				94905A7B26CCDC2800DDFAFC /* ChildrensPiggyBankViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		94905A8026CCDDE000DDFAFC /* View */ = {
+			isa = PBXGroup;
+			children = (
+				94905A8226CCDE9700DDFAFC /* ChildrensPiggyBankCollectionViewCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		94905A8126CCDDE700DDFAFC /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		A7D2A4F5095AD0D1CA7BD005 /* Pods */ = {
@@ -439,22 +442,23 @@
 			buildActionMask = 2147483647;
 			files = (
 				946449F326C1F8C400630589 /* ObjectiveViewController.swift in Sources */,
-				9438306326C85DC300E64FFF /* PurchaseViewController.swift in Sources */,
 				946449D826C1EF1300630589 /* AppDelegate.swift in Sources */,
-				9438305F26C85D6100E64FFF /* TravelViewController.swift in Sources */,
+				94905A8326CCDE9700DDFAFC /* ChildrensPiggyBankCollectionViewCell.swift in Sources */,
+				94905A7C26CCDC2800DDFAFC /* ChildrensPiggyBankViewController.swift in Sources */,
 				94644A0126C2AD0A00630589 /* WeeksOfWealthCollectionViewCell.swift in Sources */,
 				9438305D26C83BB500E64FFF /* Deposit.swift in Sources */,
 				94905A7226C9439800DDFAFC /* BackendManager.swift in Sources */,
 				946449FD26C290A500630589 /* UIVIew+AutoLayout.swift in Sources */,
 				94644A1326C2F62D00630589 /* UIView+Shadow.swift in Sources */,
+				94905A9C26CE687000DDFAFC /* Objective.swift in Sources */,
 				946449DA26C1EF1300630589 /* SceneDelegate.swift in Sources */,
 				946449FB26C288FB00630589 /* UIButton.swift in Sources */,
 				946449EE26C1F01D00630589 /* MainTabBarController.swift in Sources */,
-				9438306126C85D9300E64FFF /* StudyViewController.swift in Sources */,
+				94905A9A26CDBE7C00DDFAFC /* Balance.swift in Sources */,
 				946449F026C1F42100630589 /* BalanceViewController.swift in Sources */,
+				94A0C38226D3CF3F0005E3F5 /* BalanceWeeksOfWealth.swift in Sources */,
 				9438305B26C8318700E64FFF /* ObjectiveTableViewCell.swift in Sources */,
 				946449FF26C2AC0500630589 /* WeeksOfWealthViewController.swift in Sources */,
-				9438306526C8625300E64FFF /* TravelViewCell.swift in Sources */,
 				946449F526C254A400630589 /* MoneyBoxViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

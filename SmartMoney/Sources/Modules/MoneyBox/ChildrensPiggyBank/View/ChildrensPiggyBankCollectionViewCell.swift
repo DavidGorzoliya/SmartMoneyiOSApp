@@ -1,30 +1,27 @@
 //
-//  WeeksOfWealthCollectionViewCell.swift
+//  ChildrensPiggyBankCollectionViewCell.swift
 //  SmartMoney
 //
-//  Created by Давид Горзолия on 8/10/21.
-//
-
-// How to play a sound using Swift GOOGLE
+//  Created by Давид Горзолия on 8/18/21.
 //
 
 import UIKit
 
-protocol WeeksOfWealthCollectionViewCellDelegate: AnyObject {
+protocol ChildrensPiggyBankCollectionViewCellDelegate: AnyObject {
     
-    func weeksOfWealthCollectionViewCellTapped(_ cell: WeeksOfWealthCollectionViewCell)
+    func childrensPiggyBankCollectionViewCellTapped(_ cell: ChildrensPiggyBankCollectionViewCell)
 }
 
-class WeeksOfWealthCollectionViewCell: UICollectionViewCell {
+class ChildrensPiggyBankCollectionViewCell: UICollectionViewCell {
     
-    weak var delegate: WeeksOfWealthCollectionViewCellDelegate?
+    weak var delegate: ChildrensPiggyBankCollectionViewCellDelegate?
     
     lazy var amountLabel: UILabel = {
         let amountLabel = UILabel()
         amountLabel.font = UIFont.boldSystemFont(ofSize: 18)
         amountLabel.isUserInteractionEnabled = true
 
-        let tap = UITapGestureRecognizer(target: self, action: #selector(onWeeksOfWealthCollectionViewCellTap))
+        let tap = UITapGestureRecognizer(target: self, action: #selector(onChildrensPiggyBankViewCellTap))
         amountLabel.addGestureRecognizer(tap)
 
         return amountLabel
@@ -39,7 +36,7 @@ class WeeksOfWealthCollectionViewCell: UICollectionViewCell {
         artworkView.layer.cornerRadius = 68/2
         artworkView.backgroundColor = .white
         artworkView.dropShadow()
-        let tap = UITapGestureRecognizer(target: self, action: #selector(onWeeksOfWealthCollectionViewCellTap))
+        let tap = UITapGestureRecognizer(target: self, action: #selector(onChildrensPiggyBankViewCellTap))
         artworkView.addGestureRecognizer(tap)
 
         return artworkView
@@ -55,11 +52,13 @@ class WeeksOfWealthCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
-    @objc private func onWeeksOfWealthCollectionViewCellTap() {
+    @objc private func onChildrensPiggyBankViewCellTap() {
         let attributeString: NSMutableAttributedString =  NSMutableAttributedString(string: amountLabel.text!)
         attributeString.addAttribute(NSAttributedString.Key.strikethroughStyle, value: 2, range: NSMakeRange(0, attributeString.length))
 
-        delegate?.weeksOfWealthCollectionViewCellTapped(self)
+//        amountLabel.attributedText = attributeStrin
+//        artworkView.backgroundColor = .green
+        delegate?.childrensPiggyBankCollectionViewCellTapped(self)
     }
 
     private func layout() {
