@@ -1,20 +1,24 @@
 //
-//  WeeksOfWealthViewController.swift
+//  ChildrensPiggyBankViewController.swift
 //  SmartMoney
 //
-//  Created by Давид Горзолия on 8/10/21.
+//  Created by Давид Горзолия on 8/18/21.
 //
+
+// iPhone 12pro 2499249
+// lamborghini 94204002402
+// Santexnik ustranit zasor 9500
 
 import UIKit
 
 private let cellIdentifier = "cell"
 
-class WeeksOfWealthViewController: UIViewController {
-    
-    private var depositAmountArray = BackendManager.shared.weeksOfWealthDeposits
+class KidPiggyBankViewController: UIViewController {
     
     private lazy var infoBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "info.circle.fill"), style: .plain, target: self, action: #selector(textFildBarButtomItem))
-
+    
+    private var depositAmountArray = BackendManager.shared.kidPiggyBankCoins
+    
     private let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
@@ -29,25 +33,22 @@ class WeeksOfWealthViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        view.backgroundColor = .white
-        title = "52 WEEKS OF WEALTH"
-
-        setupCollectionView()
+        view.backgroundColor = #colorLiteral(red: 0.9999960065, green: 1, blue: 1, alpha: 1)
+        title = "1 - 100 PIGGY BANK"
         layout()
+        setupCollectionView()
     }
+    
     private func layout() {
         view.addSubview(collectionView)
         collectionView.pinToSuperviewSafeArea()
         navigationItem.rightBarButtonItem = infoBarButtonItem
     }
-
     private func setupCollectionView() {
-        collectionView.register(WeeksOfWealthCollectionViewCell.self, forCellWithReuseIdentifier: cellIdentifier)
+        collectionView.register(ChildrensPiggyBankCollectionViewCell.self, forCellWithReuseIdentifier: cellIdentifier)
         collectionView.delegate = self
         collectionView.dataSource = self
     }
-
     @objc private func textFildBarButtomItem() {
         let vc = UIViewController()
         let navVc = UINavigationController(rootViewController: vc)
@@ -58,7 +59,7 @@ class WeeksOfWealthViewController: UIViewController {
         let gameDescriptionLabel = UILabel()
         gameDescriptionLabel.numberOfLines = 0
         gameDescriptionLabel.font = UIFont.boldSystemFont(ofSize: gameDescriptionLabel.font.pointSize)
-        gameDescriptionLabel.text = "- 1 раз в неделю выбирай любую ячейку и пополняй копилку номиналом ячейки! \n\n- Игра пройдена, когда все ячейки закрашены!"
+        gameDescriptionLabel.text = "- 1 раз в день выбирай любую ячейку и пополняй копилку номиналом ячейки! \n\n- Игра пройдена, когда все ячейки закрашены!"
 
         vc.view.addSubview(gameDescriptionLabel)
         gameDescriptionLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -73,13 +74,13 @@ class WeeksOfWealthViewController: UIViewController {
     }
 }
 
-extension WeeksOfWealthViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+extension KidPiggyBankViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return depositAmountArray.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath) as? WeeksOfWealthCollectionViewCell else {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath) as? ChildrensPiggyBankCollectionViewCell else {
             return UICollectionViewCell()
         }
         let deposit = depositAmountArray[indexPath.row]
@@ -100,7 +101,7 @@ extension WeeksOfWealthViewController: UICollectionViewDataSource, UICollectionV
     }
 }
 
-extension WeeksOfWealthViewController: UICollectionViewDelegateFlowLayout {
+extension KidPiggyBankViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -108,12 +109,11 @@ extension WeeksOfWealthViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
-extension WeeksOfWealthViewController: WeeksOfWealthCollectionViewCellDelegate {
-    func weeksOfWealthCollectionViewCellTapped(_ cell: WeeksOfWealthCollectionViewCell) {
-        let deposit = BackendManager.shared.modifyDeposit(with: Int(cell.amountLabel.text!)!)
-
+extension KidPiggyBankViewController: ChildrensPiggyBankCollectionViewCellDelegate {
+    func childrensPiggyBankCollectionViewCellTapped(_ cell: ChildrensPiggyBankCollectionViewCell) {
         guard let text = cell.amountLabel.text,
-              let amount = Int(text) else {
+              let amount = Int(text),
+              let deposit = BackendManager.shared.modifyChildrensPiggyBankCoinCompletion(coinWithAmount: amount) else {
             return
         }
 
@@ -123,12 +123,10 @@ extension WeeksOfWealthViewController: WeeksOfWealthCollectionViewCellDelegate {
 
             cell.amountLabel.attributedText = attributeString
             cell.artworkView.backgroundColor = .green
-            BackendManager.shared.addToBalanceFromWeeksOfWealthPiggyBank(amount: amount)
         } else {
             cell.amountLabel.attributedText = nil
             cell.amountLabel.text = String(deposit.amount)
             cell.artworkView.backgroundColor = .white
-            BackendManager.shared.addToBalanceFromWeeksOfWealthPiggyBank(amount: -amount)
         }
     }
 }

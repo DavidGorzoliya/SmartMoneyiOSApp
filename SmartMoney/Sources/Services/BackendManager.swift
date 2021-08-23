@@ -14,36 +14,36 @@ class BackendManager {
     static let shared = BackendManager()
     private let realm = try! Realm()
 // получения обьекта с реалма
-    private var allDeposits: [Deposit] {
-        realm.objects(Deposit.self).map({ $0 })
+    private var coins: [Coin] {
+        realm.objects(Coin.self).map({ $0 })
     }
 
-    var childrensPiggyBankDeposits: [Deposit] {
-        Array(allDeposits.dropFirst(57))
+    var kidPiggyBankCoins: [Coin] {
+        Array(coins.dropFirst(57))
     }
 
-    var weeksOfWealthDeposits: [Deposit] {
-        Array(allDeposits.dropLast(100))
+    var adultPiggyBankCoins: [Coin] {
+        Array(coins.dropLast(100))
     }
 
     var balance: Balance {
         realm.objects(Balance.self).first!
     }
     
-    var balanceWeeksOfWealth: BalanceWeeksOfWealth {
-        realm.objects(BalanceWeeksOfWealth.self).first!
+    var balanceAdultPiggyBank: BalanceAdultPiggyBank {
+        realm.objects(BalanceAdultPiggyBank.self).first!
     }
     
-    var getAllObjectives: [Objective] {
+    var objectives: [Objective] {
         realm.objects(Objective.self).map({ $0 })
     }
 
     private init() {
-        if realm.objects(Deposit.self).isEmpty {
+        if realm.objects(Coin.self).isEmpty {
             do {
                 try realm.write {
-                    realm.add(Deposit.generateWeeksOfWealthDeposits())
-                    realm.add(Deposit.generateChildrensPiggyBankDeposits())
+                    realm.add(Coin.generateAdultPiggyBankCoins())
+                    realm.add(Coin.generateChildrensPiggyBankCoins())
                 }
             } catch {
                 print(error)
@@ -60,10 +60,10 @@ class BackendManager {
             }
         }
         
-        if realm.objects(BalanceWeeksOfWealth.self).isEmpty {
+        if realm.objects(BalanceAdultPiggyBank.self).isEmpty {
             do {
                 try realm.write {
-                    realm.add(BalanceWeeksOfWealth())
+                    realm.add(BalanceAdultPiggyBank())
                 }
             } catch {
                 print(error)
@@ -86,6 +86,43 @@ class BackendManager {
                 print(error)
             }
         }
+    }
+}
+
+// MARK: - Piggy bank
+extension BackendManager {
+    func modifyChildrensPiggyBankCoinCompletion(coinWithAmount amount: Int) -> Coin? {
+        guard let coin = kidPiggyBankCoins.first(where: { $0.amount == amount}) else {
+            return nil
+        }
+        
+        do {
+            try realm.write {
+                coin.completed = !coin.completed
+            }
+        } catch {
+            print(error)
+            return nil
+        }
+    
+        return coin
+    }
+
+    func modifyAdultPiggyBankCoinCompletion(coinWithAmount amount: Int) -> Coin? {
+        guard let coin = adultPiggyBankCoins.first(where: { $0.amount == amount}) else {
+            return nil
+        }
+
+        do {
+            try realm.write {
+                coin.completed = !coin.completed
+            }
+        } catch {
+            print(error)
+            return nil
+        }
+
+        return coin
     }
 }
 
@@ -122,8 +159,8 @@ extension BackendManager {
 
 // MARK: - Balance piggy bank
 extension BackendManager {
-    func addToBalanceFromWeeksOfWealthPiggyBank(amount: Int) {
-        guard let deposit = realm.objects(BalanceWeeksOfWealth.self).first else {
+    func addToBalanceFromAdultPiggyBank(amount: Int) {
+        guard let deposit = realm.objects(BalanceAdultPiggyBank.self).first else {
             return
         }
         do {

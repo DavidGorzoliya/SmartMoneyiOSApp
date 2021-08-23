@@ -22,7 +22,7 @@ class BalanceViewController: UIViewController {
         }
     }
 
-    private var balanceWeeksOfWealth: Int = BackendManager.shared.balanceWeeksOfWealth.amount {
+    private var balanceWeeksOfWealth: Int = BackendManager.shared.balanceAdultPiggyBank.amount {
         didSet {
             balanceWeekOfWealsLabel.text = "\(balanceWeeksOfWealth)"
         }
@@ -43,7 +43,7 @@ class BalanceViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        balanceWeeksOfWealth = BackendManager.shared.balanceWeeksOfWealth.amount
+        balanceWeeksOfWealth = BackendManager.shared.balanceAdultPiggyBank.amount
     }
 
     @objc private func onAddToBalance() {

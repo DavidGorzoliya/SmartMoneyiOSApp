@@ -8,6 +8,6 @@
 import Foundation
 import RealmSwift
 
-class BalanceWeeksOfWealth: Object {
+class BalanceAdultPiggyBank: Object {
     @objc dynamic var amount: Int = 0
 }

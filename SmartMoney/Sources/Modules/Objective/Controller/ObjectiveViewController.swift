@@ -13,7 +13,7 @@ class ObjectiveViewController: UIViewController {
     
     private let tableView = UITableView()
     
-    var objectives = BackendManager.shared.getAllObjectives {
+    var objectives = BackendManager.shared.objectives {
         didSet {
             tableView.reloadData()
         }
@@ -55,7 +55,7 @@ class ObjectiveViewController: UIViewController {
             }
             
             BackendManager.shared.addObjective(title: text)
-            self.objectives = BackendManager.shared.getAllObjectives
+            self.objectives = BackendManager.shared.objectives
         }
 
         alertController.addAction(addToPriceObjective)
@@ -82,7 +82,7 @@ extension ObjectiveViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             BackendManager.shared.deleteObjective(at: indexPath.row)
-            objectives = BackendManager.shared.getAllObjectives
+            objectives = BackendManager.shared.objectives
         }
     }
 
@@ -115,7 +115,7 @@ extension ObjectiveViewController: ObjectiveTableViewCellDelegate {
             }
 
             BackendManager.shared.modifyObjective(price: price, title: cell.textLabel!.text!)
-            self.objectives = BackendManager.shared.getAllObjectives
+            self.objectives = BackendManager.shared.objectives
         }
 
         alertController.addAction(modifyPriceObjective)

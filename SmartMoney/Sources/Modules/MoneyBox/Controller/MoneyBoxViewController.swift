@@ -48,11 +48,11 @@ class MoneyBoxViewController: UIViewController {
     }
     
     @objc func transitionButton() {
-        let weeksOfWealthViewController = WeeksOfWealthViewController()
+        let weeksOfWealthViewController = AdultPiggyBankViewController()
         navigationController?.pushViewController(weeksOfWealthViewController, animated: true)
     }
     @objc func transitionChildrensButton() {
-        let ChildrensPiggyBankViewController = ChildrensPiggyBankViewController()
+        let ChildrensPiggyBankViewController = KidPiggyBankViewController()
         navigationController?.pushViewController(ChildrensPiggyBankViewController, animated: true)
     }
     

@@ -1,24 +1,20 @@
 //
-//  ChildrensPiggyBankViewController.swift
+//  WeeksOfWealthViewController.swift
 //  SmartMoney
 //
-//  Created by Давид Горзолия on 8/18/21.
+//  Created by Давид Горзолия on 8/10/21.
 //
-
-// iPhone 12pro 2499249
-// lamborghini 94204002402
-// Santexnik ustranit zasor 9500
 
 import UIKit
 
 private let cellIdentifier = "cell"
 
-class ChildrensPiggyBankViewController: UIViewController {
+class AdultPiggyBankViewController: UIViewController {
+    
+    private var depositAmountArray = BackendManager.shared.adultPiggyBankCoins
     
     private lazy var infoBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "info.circle.fill"), style: .plain, target: self, action: #selector(textFildBarButtomItem))
-    
-    private var depositAmountArray = BackendManager.shared.childrensPiggyBankDeposits
-    
+
     private let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
@@ -33,22 +29,25 @@ class ChildrensPiggyBankViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = #colorLiteral(red: 0.9999960065, green: 1, blue: 1, alpha: 1)
-        title = "1 - 100 PIGGY BANK"
-        layout()
+
+        view.backgroundColor = .white
+        title = "52 WEEKS OF WEALTH"
+
         setupCollectionView()
+        layout()
     }
-    
     private func layout() {
         view.addSubview(collectionView)
         collectionView.pinToSuperviewSafeArea()
         navigationItem.rightBarButtonItem = infoBarButtonItem
     }
+
     private func setupCollectionView() {
-        collectionView.register(ChildrensPiggyBankCollectionViewCell.self, forCellWithReuseIdentifier: cellIdentifier)
+        collectionView.register(AdultPiggyBankCollectionViewCell.self, forCellWithReuseIdentifier: cellIdentifier)
         collectionView.delegate = self
         collectionView.dataSource = self
     }
+
     @objc private func textFildBarButtomItem() {
         let vc = UIViewController()
         let navVc = UINavigationController(rootViewController: vc)
@@ -59,7 +58,7 @@ class ChildrensPiggyBankViewController: UIViewController {
         let gameDescriptionLabel = UILabel()
         gameDescriptionLabel.numberOfLines = 0
         gameDescriptionLabel.font = UIFont.boldSystemFont(ofSize: gameDescriptionLabel.font.pointSize)
-        gameDescriptionLabel.text = "- 1 раз в день выбирай любую ячейку и пополняй копилку номиналом ячейки! \n\n- Игра пройдена, когда все ячейки закрашены!"
+        gameDescriptionLabel.text = "- 1 раз в неделю выбирай любую ячейку и пополняй копилку номиналом ячейки! \n\n- Игра пройдена, когда все ячейки закрашены!"
 
         vc.view.addSubview(gameDescriptionLabel)
         gameDescriptionLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -74,13 +73,13 @@ class ChildrensPiggyBankViewController: UIViewController {
     }
 }
 
-extension ChildrensPiggyBankViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+extension AdultPiggyBankViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return depositAmountArray.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath) as? ChildrensPiggyBankCollectionViewCell else {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath) as? AdultPiggyBankCollectionViewCell else {
             return UICollectionViewCell()
         }
         let deposit = depositAmountArray[indexPath.row]
@@ -88,12 +87,12 @@ extension ChildrensPiggyBankViewController: UICollectionViewDataSource, UICollec
             let attributeString: NSMutableAttributedString =  NSMutableAttributedString(string: String(deposit.amount))
             attributeString.addAttribute(NSAttributedString.Key.strikethroughStyle, value: 2, range: NSMakeRange(0, attributeString.length))
 
-            cell.amountLabel.attributedText = attributeString
-            cell.artworkView.backgroundColor = .green
+            cell.coinAmountLabel.attributedText = attributeString
+            cell.coinView.backgroundColor = .green
         } else {
-            cell.amountLabel.attributedText = nil
-            cell.amountLabel.text = String(deposit.amount)
-            cell.artworkView.backgroundColor = .white
+            cell.coinAmountLabel.attributedText = nil
+            cell.coinAmountLabel.text = String(deposit.amount)
+            cell.coinView.backgroundColor = .white
         }
         cell.delegate = self
 
@@ -101,7 +100,7 @@ extension ChildrensPiggyBankViewController: UICollectionViewDataSource, UICollec
     }
 }
 
-extension ChildrensPiggyBankViewController: UICollectionViewDelegateFlowLayout {
+extension AdultPiggyBankViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -109,20 +108,28 @@ extension ChildrensPiggyBankViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
-extension ChildrensPiggyBankViewController: ChildrensPiggyBankCollectionViewCellDelegate {
-    func childrensPiggyBankCollectionViewCellTapped(_ cell: ChildrensPiggyBankCollectionViewCell) {
-        let deposit = BackendManager.shared.modifyDeposit(with: Int(cell.amountLabel.text!)!)
+// MARK: - WeeksOfWealthCollectionViewCellDelegate
+extension AdultPiggyBankViewController: AdultPiggyBankCollectionViewCellDelegate {
+    func adultPiggyBankCollectionViewCellTapped(_ cell: AdultPiggyBankCollectionViewCell) {
+
+        guard let text = cell.coinAmountLabel.text,
+              let amount = Int(text),
+              let deposit = BackendManager.shared.modifyAdultPiggyBankCoinCompletion(coinWithAmount: amount) else {
+            return
+        }
 
         if deposit.completed {
-            let attributeString: NSMutableAttributedString =  NSMutableAttributedString(string: cell.amountLabel.text!)
+            let attributeString: NSMutableAttributedString =  NSMutableAttributedString(string: cell.coinAmountLabel.text!)
             attributeString.addAttribute(NSAttributedString.Key.strikethroughStyle, value: 2, range: NSMakeRange(0, attributeString.length))
 
-            cell.amountLabel.attributedText = attributeString
-            cell.artworkView.backgroundColor = .green
+            cell.coinAmountLabel.attributedText = attributeString
+            cell.coinView.backgroundColor = .green
+            BackendManager.shared.addToBalanceFromAdultPiggyBank(amount: amount)
         } else {
-            cell.amountLabel.attributedText = nil
-            cell.amountLabel.text = String(deposit.amount)
-            cell.artworkView.backgroundColor = .white
+            cell.coinAmountLabel.attributedText = nil
+            cell.coinAmountLabel.text = String(deposit.amount)
+            cell.coinView.backgroundColor = .white
+            BackendManager.shared.addToBalanceFromAdultPiggyBank(amount: -amount)
         }
     }
 }
