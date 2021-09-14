@@ -56,8 +56,6 @@ class ChildrensPiggyBankCollectionViewCell: UICollectionViewCell {
         let attributeString: NSMutableAttributedString =  NSMutableAttributedString(string: amountLabel.text!)
         attributeString.addAttribute(NSAttributedString.Key.strikethroughStyle, value: 2, range: NSMakeRange(0, attributeString.length))
 
-//        amountLabel.attributedText = attributeStrin
-//        artworkView.backgroundColor = .green
         delegate?.childrensPiggyBankCollectionViewCellTapped(self)
     }
 

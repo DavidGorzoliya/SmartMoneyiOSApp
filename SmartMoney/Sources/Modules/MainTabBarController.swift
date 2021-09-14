@@ -14,13 +14,6 @@ class MainTabBarController: UITabBarController {
         super.viewDidLoad()
         configureViewControllers()
         print(Realm.Configuration.defaultConfiguration.fileURL!)
-        /*
-         1. Open Finder
-         2. Press cmd + shift + G
-         3. Paste below path
-         
-         /Users/davidgorzolia/Library/Developer/CoreSimulator/Devices/1D45DDC3-9A47-4C9B-B286-CAB4AEA9CC27/data/Containers/Data/Application/027DDB52-55BF-4F7A-9E0E-08DB9549440A/Documents/default.realm
-        */
     }
     
     func configureViewControllers() {

@@ -6,12 +6,14 @@
 //
 
 import UIKit
+import AVFoundation
 
 private let cellIdentifier = "cell"
 
 class AdultPiggyBankViewController: UIViewController {
     
     private var depositAmountArray = BackendManager.shared.adultPiggyBankCoins
+    var bombSoundEffect: AVAudioPlayer?
     
     private lazy var infoBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "info.circle.fill"), style: .plain, target: self, action: #selector(textFildBarButtomItem))
 
@@ -82,18 +84,10 @@ extension AdultPiggyBankViewController: UICollectionViewDataSource, UICollection
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath) as? AdultPiggyBankCollectionViewCell else {
             return UICollectionViewCell()
         }
-        let deposit = depositAmountArray[indexPath.row]
-        if deposit.completed {
-            let attributeString: NSMutableAttributedString =  NSMutableAttributedString(string: String(deposit.amount))
-            attributeString.addAttribute(NSAttributedString.Key.strikethroughStyle, value: 2, range: NSMakeRange(0, attributeString.length))
 
-            cell.coinAmountLabel.attributedText = attributeString
-            cell.coinView.backgroundColor = .green
-        } else {
-            cell.coinAmountLabel.attributedText = nil
-            cell.coinAmountLabel.text = String(deposit.amount)
-            cell.coinView.backgroundColor = .white
-        }
+        let deposit = depositAmountArray[indexPath.row]
+        cell.coinView.backgroundColor = deposit.completed ? .SMGreen : .white
+        cell.coinAmountLabel.text = "\(deposit.amount)"
         cell.delegate = self
 
         return cell
@@ -119,17 +113,42 @@ extension AdultPiggyBankViewController: AdultPiggyBankCollectionViewCellDelegate
         }
 
         if deposit.completed {
-            let attributeString: NSMutableAttributedString =  NSMutableAttributedString(string: cell.coinAmountLabel.text!)
-            attributeString.addAttribute(NSAttributedString.Key.strikethroughStyle, value: 2, range: NSMakeRange(0, attributeString.length))
+            let coinImageView = UIImageView(frame: CGRect(x: 68 / 2 - 11, y: 0, width: 22, height: 22))
+            coinImageView.image = UIImage(systemName: "dollarsign.circle.fill")
+            coinImageView.tintColor = UIColor(red: 0.99, green: 0.80, blue: 0.28, alpha: 1.00)
+            
+            let coinImageView1 = UIImageView()
+            coinImageView1.image = UIImage(systemName: "dollarsign.circle.fill")
+            coinImageView1.tintColor = UIColor(red: 0.93, green: 0.80, blue: 0.28, alpha: 1.00)
+            
+            coinImageView1.frame = CGRect(x: coinImageView.frame.origin.x - 12, y: coinImageView.frame.origin.y, width: 22, height: 22)
+            
+            cell.contentView.addSubview(coinImageView)
+            cell.contentView.addSubview(coinImageView1)
+            
+            UIView.animate(withDuration: 1.5, animations: {
+                coinImageView.frame = CGRect(x: coinImageView.frame.origin.x, y: coinImageView.frame.origin.y + 50, width: 22, height: 22)
+                coinImageView1.frame = CGRect(x: coinImageView1.frame.origin.x, y: coinImageView.frame.origin.y + 50, width: 22, height: 22)
+            }) { _ in
+                coinImageView.removeFromSuperview()
+                coinImageView1.removeFromSuperview()
+            }
+            
+            cell.coinView.backgroundColor = .SMGreen
+            let path = Bundle.main.path(forResource: "money_v2_mi.mp3", ofType: nil)!
+            let url = URL(fileURLWithPath: path)
 
-            cell.coinAmountLabel.attributedText = attributeString
-            cell.coinView.backgroundColor = .green
+            do {
+                bombSoundEffect = try AVAudioPlayer(contentsOf: url)
+                bombSoundEffect?.play()
+            } catch {
+                print(error)
+            }
             BackendManager.shared.addToBalanceFromAdultPiggyBank(amount: amount)
         } else {
-            cell.coinAmountLabel.attributedText = nil
-            cell.coinAmountLabel.text = String(deposit.amount)
             cell.coinView.backgroundColor = .white
             BackendManager.shared.addToBalanceFromAdultPiggyBank(amount: -amount)
         }
+        cell.coinAmountLabel.text = String(deposit.amount)
     }
 }

@@ -38,8 +38,12 @@ class AdultPiggyBankCollectionViewCell: UICollectionViewCell {
         coinView.layer.cornerRadius = 68/2
         coinView.backgroundColor = .white
         coinView.dropShadow()
+       
+        
         let tap = UITapGestureRecognizer(target: self, action: #selector(onWeeksOfWealthCollectionViewCellTap))
         coinView.addGestureRecognizer(tap)
+        
+        
 
         return coinView
     }()

@@ -28,6 +28,12 @@
 		94905A9A26CDBE7C00DDFAFC /* Balance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94905A9926CDBE7C00DDFAFC /* Balance.swift */; };
 		94905A9C26CE687000DDFAFC /* Objective.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94905A9B26CE687000DDFAFC /* Objective.swift */; };
 		94A0C38226D3CF3F0005E3F5 /* BalanceAdultPiggyBank.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A0C38126D3CF3F0005E3F5 /* BalanceAdultPiggyBank.swift */; };
+		94A0C38426D5077C0005E3F5 /* BalanceKidPiggyBank.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A0C38326D5077C0005E3F5 /* BalanceKidPiggyBank.swift */; };
+		94A0C38626D6B3860005E3F5 /* money_v2_mi.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 94A0C38526D6B3860005E3F5 /* money_v2_mi.mp3 */; };
+		94B6274A26E3818600F819A5 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B6274926E3818600F819A5 /* UIColor.swift */; };
+		94B6274C26E3924000F819A5 /* UIAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B6274B26E3924000F819A5 /* UIAlertController.swift */; };
+		94B6274E26EA5C4000F819A5 /* PiggyBankDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B6274D26EA5C4000F819A5 /* PiggyBankDetailsView.swift */; };
+		94B6275126EA640100F819A5 /* BalanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B6275026EA640100F819A5 /* BalanceView.swift */; };
 		A3A8EA7420A33B2D01E04A33 /* Pods_SmartMoney.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21E4E9998DBE1C6239D4D0BF /* Pods_SmartMoney.framework */; };
 /* End PBXBuildFile section */
 
@@ -57,6 +63,12 @@
 		94905A9926CDBE7C00DDFAFC /* Balance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Balance.swift; sourceTree = "<group>"; };
 		94905A9B26CE687000DDFAFC /* Objective.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Objective.swift; sourceTree = "<group>"; };
 		94A0C38126D3CF3F0005E3F5 /* BalanceAdultPiggyBank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceAdultPiggyBank.swift; sourceTree = "<group>"; };
+		94A0C38326D5077C0005E3F5 /* BalanceKidPiggyBank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceKidPiggyBank.swift; sourceTree = "<group>"; };
+		94A0C38526D6B3860005E3F5 /* money_v2_mi.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = money_v2_mi.mp3; sourceTree = "<group>"; };
+		94B6274926E3818600F819A5 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
+		94B6274B26E3924000F819A5 /* UIAlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIAlertController.swift; sourceTree = "<group>"; };
+		94B6274D26EA5C4000F819A5 /* PiggyBankDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PiggyBankDetailsView.swift; sourceTree = "<group>"; };
+		94B6275026EA640100F819A5 /* BalanceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceView.swift; sourceTree = "<group>"; };
 		FDBBB803ABFE7F784969A298 /* Pods-SmartMoney.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartMoney.debug.xcconfig"; path = "Target Support Files/Pods-SmartMoney/Pods-SmartMoney.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -83,6 +95,7 @@
 		946449CB26C1EF1300630589 = {
 			isa = PBXGroup;
 			children = (
+				94A0C38526D6B3860005E3F5 /* money_v2_mi.mp3 */,
 				946449D626C1EF1300630589 /* SmartMoney */,
 				946449D526C1EF1300630589 /* Products */,
 				A7D2A4F5095AD0D1CA7BD005 /* Pods */,
@@ -138,6 +151,8 @@
 				946449FA26C288FB00630589 /* UIButton.swift */,
 				946449FC26C290A500630589 /* UIVIew+AutoLayout.swift */,
 				94644A1226C2F62D00630589 /* UIView+Shadow.swift */,
+				94B6274926E3818600F819A5 /* UIColor.swift */,
+				94B6274B26E3924000F819A5 /* UIAlertController.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -145,6 +160,7 @@
 		94644A0226C2F01F00630589 /* Balance */ = {
 			isa = PBXGroup;
 			children = (
+				94B6274F26EA5C4F00F819A5 /* View */,
 				94644A1126C2F0ED00630589 /* Model */,
 				94644A0F26C2F0E600630589 /* Controller */,
 			);
@@ -164,6 +180,7 @@
 		94644A0426C2F03A00630589 /* MoneyBox */ = {
 			isa = PBXGroup;
 			children = (
+				94A0C38726E25D000005E3F5 /* View */,
 				94644A0526C2F04D00630589 /* Controller */,
 				94905A7A26CCDBCB00DDFAFC /* KidPiggyBank */,
 				94644A0826C2F0A200630589 /* AdultPiggybank */,
@@ -250,6 +267,7 @@
 			children = (
 				94905A9926CDBE7C00DDFAFC /* Balance.swift */,
 				94A0C38126D3CF3F0005E3F5 /* BalanceAdultPiggyBank.swift */,
+				94A0C38326D5077C0005E3F5 /* BalanceKidPiggyBank.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -283,6 +301,22 @@
 			isa = PBXGroup;
 			children = (
 				94905A8226CCDE9700DDFAFC /* ChildrensPiggyBankCollectionViewCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		94A0C38726E25D000005E3F5 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		94B6274F26EA5C4F00F819A5 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				94B6274D26EA5C4000F819A5 /* PiggyBankDetailsView.swift */,
+				94B6275026EA640100F819A5 /* BalanceView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -357,6 +391,7 @@
 			files = (
 				946449E426C1EF1800630589 /* LaunchScreen.storyboard in Resources */,
 				946449E126C1EF1800630589 /* Assets.xcassets in Resources */,
+				94A0C38626D6B3860005E3F5 /* money_v2_mi.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -410,8 +445,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				946449F326C1F8C400630589 /* ObjectiveViewController.swift in Sources */,
+				94B6274A26E3818600F819A5 /* UIColor.swift in Sources */,
 				946449D826C1EF1300630589 /* AppDelegate.swift in Sources */,
 				94905A8326CCDE9700DDFAFC /* ChildrensPiggyBankCollectionViewCell.swift in Sources */,
+				94B6274C26E3924000F819A5 /* UIAlertController.swift in Sources */,
 				94905A7C26CCDC2800DDFAFC /* KidPiggyBankViewController.swift in Sources */,
 				94644A0126C2AD0A00630589 /* AdultPiggyBankCollectionViewCell.swift in Sources */,
 				9438305D26C83BB500E64FFF /* Coin.swift in Sources */,
@@ -422,10 +459,13 @@
 				946449DA26C1EF1300630589 /* SceneDelegate.swift in Sources */,
 				946449FB26C288FB00630589 /* UIButton.swift in Sources */,
 				946449EE26C1F01D00630589 /* MainTabBarController.swift in Sources */,
+				94B6274E26EA5C4000F819A5 /* PiggyBankDetailsView.swift in Sources */,
 				94905A9A26CDBE7C00DDFAFC /* Balance.swift in Sources */,
+				94A0C38426D5077C0005E3F5 /* BalanceKidPiggyBank.swift in Sources */,
 				946449F026C1F42100630589 /* BalanceViewController.swift in Sources */,
 				94A0C38226D3CF3F0005E3F5 /* BalanceAdultPiggyBank.swift in Sources */,
 				9438305B26C8318700E64FFF /* ObjectiveTableViewCell.swift in Sources */,
+				94B6275126EA640100F819A5 /* BalanceView.swift in Sources */,
 				946449FF26C2AC0500630589 /* AdultPiggyBankViewController.swift in Sources */,
 				946449F526C254A400630589 /* MoneyBoxViewController.swift in Sources */,
 			);

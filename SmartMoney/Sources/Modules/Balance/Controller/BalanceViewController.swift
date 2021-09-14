@@ -8,23 +8,35 @@
 import UIKit
 
 class BalanceViewController: UIViewController {
-    
-    private var balanceWeekOfWealsLabel : UILabel = {
-        
-        let balanceWeekOfWealsLable = UILabel()
-        balanceWeekOfWealsLable.text = "VOT ON TYT"
-        return balanceWeekOfWealsLable
-    }()
-    
+
+    enum OperationType {
+        case add
+        case subtract
+    }
+
+    var balanceView: BalanceView {
+        return view as! BalanceView
+    }
+
+    override func loadView() {
+        view = BalanceView()
+    }
+
     private var balance: Int = BackendManager.shared.balance.amount {
         didSet {
             title = String(balance)
         }
     }
 
-    private var balanceWeeksOfWealth: Int = BackendManager.shared.balanceAdultPiggyBank.amount {
+    private var balanceAdultPiggyBank: Int = BackendManager.shared.balanceAdultPiggyBank.amount {
         didSet {
-            balanceWeekOfWealsLabel.text = "\(balanceWeeksOfWealth)"
+            balanceView.weeksOfWealth.subtitleLabel.text = "\(balanceAdultPiggyBank) OF 137800"
+        }
+    }
+
+    private var balanceKidPiggyBank: Int = BackendManager.shared.balanceKidPiggyBank.amount {
+        didSet {
+            balanceView.childrenPiggyBank.subtitleLabel.text = "\(balanceKidPiggyBank) OF 5050"
         }
     }
 
@@ -32,8 +44,6 @@ class BalanceViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         title = String(balance)
-        layout()
-        
 
         navigationController?.navigationBar.prefersLargeTitles = true
 
@@ -43,14 +53,23 @@ class BalanceViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        balanceWeeksOfWealth = BackendManager.shared.balanceAdultPiggyBank.amount
+        balanceAdultPiggyBank = BackendManager.shared.balanceAdultPiggyBank.amount
+        balanceKidPiggyBank = BackendManager.shared.balanceKidPiggyBank.amount
     }
 
     @objc private func onAddToBalance() {
-        let alertController = UIAlertController(title: "Write the amount", message: nil, preferredStyle: .alert)
+        onBalanceChange(operationType: .add)
+    }
+
+    @objc private func onSubtractFromBalance() {
+        onBalanceChange(operationType: .subtract)
+    }
+
+    private func onBalanceChange(operationType: OperationType) {
+        let alertController = UIAlertController.makeSMAlertController(title: "Write the amount")
         alertController.addTextField { $0.keyboardType = .numberPad }
 
-        let addToBalanceAction = UIAlertAction(title: "Add", style: .default) { [unowned alertController] _ in
+        let addToBalanceAction = UIAlertAction(title: "Done", style: .default) { [unowned alertController] _ in
 
             guard let textFields = alertController.textFields,
                   let amountTextField = textFields.first,
@@ -58,39 +77,12 @@ class BalanceViewController: UIViewController {
                   let amount = Int(text) else {
                 return
             }
-            
-            BackendManager.shared.addToBalance(amount: amount)
+
+            BackendManager.shared.changeBalance(amount: operationType == .add ? amount : -amount)
             self.balance = BackendManager.shared.balance.amount
         }
 
         alertController.addAction(addToBalanceAction)
         present(alertController, animated: true)
-    }
-    @objc private func onSubtractFromBalance() {
-        let alertController = UIAlertController(title: "Write the amount", message: nil, preferredStyle: .alert)
-        alertController.addTextField { $0.keyboardType = .numberPad }
-
-        let onSubtractFromBalance = UIAlertAction(title: "Add", style: .default) { [unowned alertController] _ in
-
-            guard let textFields = alertController.textFields,
-                  let amountTextField = textFields.first,
-                  let text = amountTextField.text,
-                  let amount = Int(text) else {
-                return
-            }
-            
-            BackendManager.shared.subtractFromBalance(amount: amount)
-            self.balance = BackendManager.shared.balance.amount
-        }
-
-        alertController.addAction(onSubtractFromBalance)
-        present(alertController, animated: true)
-    }
-    
-    private func layout() {
-        view.addSubview(balanceWeekOfWealsLabel)
-        balanceWeekOfWealsLabel.translatesAutoresizingMaskIntoConstraints = false
-        balanceWeekOfWealsLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        balanceWeekOfWealsLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
     }
 }

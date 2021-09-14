@@ -7,63 +7,43 @@
 
 import UIKit
 
-class Wallet {
-    private var balance: Double = 0.0
-    private var piggyBank: Double = 0.0
-}
+private let cellIdentifier = "cell"
 
 class MoneyBoxViewController: UIViewController {
-    
-    lazy var transitionWealthWeekButton: UIButton = {
-        let transitionWealthWeekButton = UIButton()
-        transitionWealthWeekButton.addTarget(self, action: #selector(transitionButton), for: .touchUpInside)
-        transitionWealthWeekButton.backgroundColor = .white
-        transitionWealthWeekButton.setTitleColor(.black, for: .normal)
-        transitionWealthWeekButton.titleLabel?.adjustsFontSizeToFitWidth = true
-        transitionWealthWeekButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
-        transitionWealthWeekButton.setTitle("  52 WEEKS OF WEALTH  ", for: .normal)
-        transitionWealthWeekButton.layer.cornerRadius = 8
-        transitionWealthWeekButton.dropShadow(shadowRadius: 2)
-        
-        return transitionWealthWeekButton
-    }()
-    lazy var transitionChildransBankButton: UIButton = {
-        let transitionWealthWeekButton = UIButton()
-        transitionWealthWeekButton.addTarget(self, action: #selector(transitionChildrensButton), for: .touchUpInside)
-        transitionWealthWeekButton.backgroundColor = .white
-        transitionWealthWeekButton.setTitleColor(.black, for: .normal)
-        transitionWealthWeekButton.titleLabel?.adjustsFontSizeToFitWidth = true
-        transitionWealthWeekButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
-        transitionWealthWeekButton.setTitle("  CHILDRENS PIGGY BANK  ", for: .normal)
-        transitionWealthWeekButton.layer.cornerRadius = 8
-        transitionWealthWeekButton.dropShadow(shadowRadius: 2)
-        
-        return transitionWealthWeekButton
-    }()
+    private var menuItems = ["52 WEEKS OF WEALTH", "CHILDRENS PIGGY BANK"]
+    private var tableView = UITableView()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = #colorLiteral(red: 1, green: 0, blue: 1, alpha: 1)
-        layout()
+        view.backgroundColor = .white
+
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
+        view.addSubview(tableView)
+        tableView.pinToSuperview()
+        tableView.tableFooterView = UIView()
     }
-    
-    @objc func transitionButton() {
-        let weeksOfWealthViewController = AdultPiggyBankViewController()
-        navigationController?.pushViewController(weeksOfWealthViewController, animated: true)
+}
+
+// MARK: - UITableViewDelegate, UITableViewDataSource
+extension MoneyBoxViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        menuItems.count
     }
-    @objc func transitionChildrensButton() {
-        let ChildrensPiggyBankViewController = KidPiggyBankViewController()
-        navigationController?.pushViewController(ChildrensPiggyBankViewController, animated: true)
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
+        cell.textLabel?.text = menuItems[indexPath.row]
+        cell.textLabel?.textAlignment = .center
+        cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 20)
+        cell.textLabel?.setupShadow()
+
+        return cell
     }
-    
-    func layout() {
-        view.addSubview(transitionWealthWeekButton)
-        transitionWealthWeekButton.translatesAutoresizingMaskIntoConstraints = false
-        transitionWealthWeekButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 30).isActive = true
-        transitionWealthWeekButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        view.addSubview(transitionChildransBankButton)
-        transitionChildransBankButton.translatesAutoresizingMaskIntoConstraints = false
-        transitionChildransBankButton.topAnchor.constraint(equalTo: transitionWealthWeekButton.bottomAnchor, constant: 30).isActive = true
-        transitionChildransBankButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let vc = indexPath.row == 0 ? AdultPiggyBankViewController() : KidPiggyBankViewController()
+        navigationController?.pushViewController(vc, animated: true)
     }
 }

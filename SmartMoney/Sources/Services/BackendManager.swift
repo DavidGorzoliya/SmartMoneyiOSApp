@@ -13,7 +13,7 @@ import RealmSwift
 class BackendManager {
     static let shared = BackendManager()
     private let realm = try! Realm()
-// получения обьекта с реалма
+
     private var coins: [Coin] {
         realm.objects(Coin.self).map({ $0 })
     }
@@ -34,6 +34,10 @@ class BackendManager {
         realm.objects(BalanceAdultPiggyBank.self).first!
     }
     
+    var balanceKidPiggyBank: BalansKidPiggyBank {
+        realm.objects(BalansKidPiggyBank.self).first!
+    }
+    
     var objectives: [Objective] {
         realm.objects(Objective.self).map({ $0 })
     }
@@ -44,6 +48,16 @@ class BackendManager {
                 try realm.write {
                     realm.add(Coin.generateAdultPiggyBankCoins())
                     realm.add(Coin.generateChildrensPiggyBankCoins())
+                }
+            } catch {
+                print(error)
+            }
+        }
+        
+        if realm.objects(BalansKidPiggyBank.self).isEmpty {
+            do {
+                try realm.write {
+                    realm.add(BalansKidPiggyBank())
                 }
             } catch {
                 print(error)
@@ -128,28 +142,13 @@ extension BackendManager {
 
 // MARK: - Balance
 extension BackendManager {
-    func addToBalance(amount: Int) {
-        guard let deposit = realm.objects(Balance.self).first,
-              amount > 0 else {
+    func changeBalance(amount: Int) {
+        guard let deposit = realm.objects(Balance.self).first else {
             return
         }
         do {
             try realm.write {
                 deposit.amount += amount
-            }
-        } catch {
-            print(error)
-        }
-    }
-
-    func subtractFromBalance(amount: Int) {
-        guard let deposit = realm.objects(Balance.self).first,
-              amount > 0 else {
-            return
-        }
-        do {
-            try realm.write {
-                deposit.amount -= amount
             }
         } catch {
             print(error)
@@ -171,14 +170,31 @@ extension BackendManager {
             print(error)
         }
     }
+    
+    func addToBalanceFromKidPiggyBank(amount: Int) {
+        guard let deposit = realm.objects(BalansKidPiggyBank.self).first else {
+            return
+        }
+        do {
+            try realm.write {
+                deposit.amount += amount
+            }
+        } catch {
+            print(error)
+        }
+    }
 }
 
 // MARK: - Objective
 extension BackendManager {
-    func addObjective(title: String) {
+    func addObjective(title: String, price: Int) {
+        guard price > 0 else {
+            print("Price cannot be less than zero")
+            return
+        }
         do {
             try realm.write {
-                realm.add(Objective(price: 0, title: title))
+                realm.add(Objective(price: price, title: title))
             }
         } catch {
             print(error)
@@ -209,3 +225,5 @@ extension BackendManager {
     }
 
 }
+
+

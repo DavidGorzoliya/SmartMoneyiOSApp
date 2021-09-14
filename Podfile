@@ -7,4 +7,5 @@ target 'SmartMoney' do
 
   # Pods for SmartMoney
   pod 'RealmSwift'
+  pod 'TableViewReloadAnimation', '~> 0.0.5'
 end

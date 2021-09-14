@@ -10,6 +10,7 @@
 // Santexnik ustranit zasor 9500
 
 import UIKit
+import AVFoundation
 
 private let cellIdentifier = "cell"
 
@@ -18,6 +19,7 @@ class KidPiggyBankViewController: UIViewController {
     private lazy var infoBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "info.circle.fill"), style: .plain, target: self, action: #selector(textFildBarButtomItem))
     
     private var depositAmountArray = BackendManager.shared.kidPiggyBankCoins
+    var bombSoundEffect: AVAudioPlayer?
     
     private let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -33,7 +35,7 @@ class KidPiggyBankViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = #colorLiteral(red: 0.9999960065, green: 1, blue: 1, alpha: 1)
+        view.backgroundColor = .white
         title = "1 - 100 PIGGY BANK"
         layout()
         setupCollectionView()
@@ -83,18 +85,10 @@ extension KidPiggyBankViewController: UICollectionViewDataSource, UICollectionVi
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath) as? ChildrensPiggyBankCollectionViewCell else {
             return UICollectionViewCell()
         }
-        let deposit = depositAmountArray[indexPath.row]
-        if deposit.completed {
-            let attributeString: NSMutableAttributedString =  NSMutableAttributedString(string: String(deposit.amount))
-            attributeString.addAttribute(NSAttributedString.Key.strikethroughStyle, value: 2, range: NSMakeRange(0, attributeString.length))
 
-            cell.amountLabel.attributedText = attributeString
-            cell.artworkView.backgroundColor = .green
-        } else {
-            cell.amountLabel.attributedText = nil
-            cell.amountLabel.text = String(deposit.amount)
-            cell.artworkView.backgroundColor = .white
-        }
+        let deposit = depositAmountArray[indexPath.row]
+        cell.artworkView.backgroundColor = deposit.completed ? .SMGreen : .white
+        cell.amountLabel.text = "\(deposit.amount)"
         cell.delegate = self
 
         return cell
@@ -118,15 +112,42 @@ extension KidPiggyBankViewController: ChildrensPiggyBankCollectionViewCellDelega
         }
 
         if deposit.completed {
-            let attributeString: NSMutableAttributedString =  NSMutableAttributedString(string: cell.amountLabel.text!)
-            attributeString.addAttribute(NSAttributedString.Key.strikethroughStyle, value: 2, range: NSMakeRange(0, attributeString.length))
+            let coinImageView = UIImageView(frame: CGRect(x: 68 / 2 - 11, y: 0, width: 22, height: 22))
+            coinImageView.image = UIImage(systemName: "dollarsign.circle.fill")
+            coinImageView.tintColor = UIColor(red: 0.99, green: 0.80, blue: 0.28, alpha: 1.00)
+            
+            let coinImageView1 = UIImageView()
+            coinImageView1.image = UIImage(systemName: "dollarsign.circle.fill")
+            coinImageView1.tintColor = UIColor(red: 0.93, green: 0.80, blue: 0.28, alpha: 1.00)
+            
+            coinImageView1.frame = CGRect(x: coinImageView.frame.origin.x - 12, y: coinImageView.frame.origin.y, width: 22, height: 22)
+            
+            cell.contentView.addSubview(coinImageView)
+            cell.contentView.addSubview(coinImageView1)
+            
+            UIView.animate(withDuration: 1.5, animations: {
+                coinImageView.frame = CGRect(x: coinImageView.frame.origin.x, y: coinImageView.frame.origin.y + 50, width: 22, height: 22)
+                coinImageView1.frame = CGRect(x: coinImageView1.frame.origin.x, y: coinImageView.frame.origin.y + 50, width: 22, height: 22)
+            }) { _ in
+                coinImageView.removeFromSuperview()
+                coinImageView1.removeFromSuperview()
+            }
+            
+            cell.artworkView.backgroundColor = UIColor(red: 0.36, green: 0.88, blue: 0.20, alpha: 1.00)
+            let path = Bundle.main.path(forResource: "money_v2_mi.mp3", ofType: nil)!
+            let url = URL(fileURLWithPath: path)
 
-            cell.amountLabel.attributedText = attributeString
-            cell.artworkView.backgroundColor = .green
+            do {
+                bombSoundEffect = try AVAudioPlayer(contentsOf: url)
+                bombSoundEffect?.play()
+            } catch {
+                print(error)
+            }
+            BackendManager.shared.addToBalanceFromKidPiggyBank(amount: amount)
         } else {
-            cell.amountLabel.attributedText = nil
-            cell.amountLabel.text = String(deposit.amount)
             cell.artworkView.backgroundColor = .white
+            BackendManager.shared.addToBalanceFromKidPiggyBank(amount: -amount)
         }
+        cell.amountLabel.text = String(deposit.amount)
     }
 }

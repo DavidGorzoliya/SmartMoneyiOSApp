@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import TableViewReloadAnimation
 
 private let cellIdentifier = "cell"
 
@@ -15,7 +16,11 @@ class ObjectiveViewController: UIViewController {
     
     var objectives = BackendManager.shared.objectives {
         didSet {
-            tableView.reloadData()
+            tableView.reloadData(with: .spring(duration: 0.45,
+                                               damping: 0.65,
+                                               velocity: 1,
+                                               direction: .rotation(angle: Double.pi / 2),
+                                               constantDelay: 0))
         }
     }
     
@@ -25,8 +30,16 @@ class ObjectiveViewController: UIViewController {
         super.viewDidLoad()
         layout()
         setupTableView()
+        
     }
-    
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        tableView.reloadData()
+        tableView.tableFooterView = UIView()
+    }
+
     private func layout() {
         view.addSubview(tableView)
         tableView.pinToSuperview()
@@ -41,20 +54,27 @@ class ObjectiveViewController: UIViewController {
         tableView.rowHeight = 80
     }
     
-    @objc func onAddToPriceObjective() {
-        let alertController = UIAlertController(title: "Write the objective", message: nil, preferredStyle: .alert)
-        alertController.addTextField { $0.keyboardType = .numberPad }
+    @objc private func onAddToPriceObjective() {
+        let alertController = UIAlertController.makeSMAlertController(title: "Write the objective and price")
+        alertController.addTextField { $0.placeholder = "Title" }
+        alertController.addTextField {
+            $0.keyboardType = .numberPad
+            $0.placeholder = "Price"
+        }
 
         let addToPriceObjective = UIAlertAction(title: "Add", style: .default) { [unowned alertController] _ in
 
             guard let textFields = alertController.textFields,
-                  let amountTextField = textFields.first,
-                  let text = amountTextField.text,
-                  !text.isEmpty else {
+                  let titleTextField = textFields.first,
+                  let text = titleTextField.text,
+                  !text.isEmpty,
+                  let priceTextField = textFields.last,
+                  let priceText = priceTextField.text,
+                  let price = Int(priceText) else {
                 return
             }
             
-            BackendManager.shared.addObjective(title: text)
+            BackendManager.shared.addObjective(title: text, price: price)
             self.objectives = BackendManager.shared.objectives
         }
 
@@ -72,8 +92,26 @@ extension ObjectiveViewController: UITableViewDelegate, UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? ObjectiveTableViewCell else {
             return UITableViewCell()
         }
+
         cell.textLabel?.text = objectives[indexPath.row].title
-        cell.countingLabel.text = String(objectives[indexPath.row].price)
+        cell.textLabel?.setupShadow()
+        cell.priceLabel.text = String(objectives[indexPath.row].price)
+        cell.balanceLabel.text = "\(BackendManager.shared.balance.amount)"
+       
+        var percent: CGFloat
+        if objectives[indexPath.row].price < BackendManager.shared.balance.amount {
+            percent = 90
+        } else {
+            percent = CGFloat(BackendManager.shared.balance.amount) / CGFloat(objectives[indexPath.row].price) * 90.0
+        }
+        cell.progressBarView.frame.size.width = percent
+
+        if BackendManager.shared.balance.amount >= objectives[indexPath.row].price {
+            cell.balanceLabel.textColor = .SMGreen
+        } else {
+            cell.balanceLabel.textColor = .red
+        }
+        cell.price = objectives[indexPath.row].price
         cell.delegate = self
 
         return cell
@@ -85,27 +123,14 @@ extension ObjectiveViewController: UITableViewDelegate, UITableViewDataSource {
             objectives = BackendManager.shared.objectives
         }
     }
-
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        if indexPath.row == 0 {
-//            let travelViewController = TravelViewController()
-//            navigationController?.pushViewController(travelViewController, animated: true)
-//        } else if indexPath.row == 1 {
-//            let studyViewController = StudyViewController()
-//            navigationController?.pushViewController(studyViewController, animated: true)
-//        } else if indexPath.row == 2 {
-//            let purchaseViewController = PurchaseViewController()
-//            navigationController?.pushViewController(purchaseViewController, animated: true)
-//        }
-//    }
 }
 
 extension ObjectiveViewController: ObjectiveTableViewCellDelegate {
     func objectiveTableViewCellOnSubmit(_ cell: ObjectiveTableViewCell) {
-        let alertController = UIAlertController(title: "Write the price", message: nil, preferredStyle: .alert)
+        let alertController = UIAlertController.makeSMAlertController(title: "Write the price")
         alertController.addTextField { $0.keyboardType = .numberPad }
 
-        let modifyPriceObjective = UIAlertAction(title: "Add", style: .default) { [unowned alertController] _ in
+        let modifyPriceObjective = UIAlertAction(title: "Edit", style: .default) { [unowned alertController] _ in
 
             guard let textFields = alertController.textFields,
                   let amountTextField = textFields.first,
