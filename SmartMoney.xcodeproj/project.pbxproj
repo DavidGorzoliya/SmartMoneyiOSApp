@@ -148,9 +148,9 @@
 		946449F926C288C400630589 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				94644A1226C2F62D00630589 /* UIView+Shadow.swift */,
 				946449FA26C288FB00630589 /* UIButton.swift */,
 				946449FC26C290A500630589 /* UIVIew+AutoLayout.swift */,
-				94644A1226C2F62D00630589 /* UIView+Shadow.swift */,
 				94B6274926E3818600F819A5 /* UIColor.swift */,
 				94B6274B26E3924000F819A5 /* UIAlertController.swift */,
 			);
@@ -180,7 +180,6 @@
 		94644A0426C2F03A00630589 /* MoneyBox */ = {
 			isa = PBXGroup;
 			children = (
-				94A0C38726E25D000005E3F5 /* View */,
 				94644A0526C2F04D00630589 /* Controller */,
 				94905A7A26CCDBCB00DDFAFC /* KidPiggyBank */,
 				94644A0826C2F0A200630589 /* AdultPiggybank */,
@@ -301,13 +300,6 @@
 			isa = PBXGroup;
 			children = (
 				94905A8226CCDE9700DDFAFC /* ChildrensPiggyBankCollectionViewCell.swift */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		94A0C38726E25D000005E3F5 /* View */ = {
-			isa = PBXGroup;
-			children = (
 			);
 			path = View;
 			sourceTree = "<group>";

@@ -23,14 +23,13 @@ class ObjectiveViewController: UIViewController {
                                                constantDelay: 0))
         }
     }
-    
+
     private lazy var insertBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "text.insert"), style: .plain, target: self, action: #selector(onAddToPriceObjective))
 
     override func viewDidLoad() {
         super.viewDidLoad()
         layout()
         setupTableView()
-        
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -93,20 +92,22 @@ extension ObjectiveViewController: UITableViewDelegate, UITableViewDataSource {
             return UITableViewCell()
         }
 
+        let balance = BackendManager.shared.balance.amount
+
         cell.textLabel?.text = objectives[indexPath.row].title
         cell.textLabel?.setupShadow()
         cell.priceLabel.text = String(objectives[indexPath.row].price)
-        cell.balanceLabel.text = "\(BackendManager.shared.balance.amount)"
-       
-        var percent: CGFloat
-        if objectives[indexPath.row].price < BackendManager.shared.balance.amount {
+        cell.balanceLabel.text = "\(balance)"
+
+        var percent: CGFloat = 0
+        if objectives[indexPath.row].price < balance {
             percent = 90
-        } else {
-            percent = CGFloat(BackendManager.shared.balance.amount) / CGFloat(objectives[indexPath.row].price) * 90.0
+        } else if objectives[indexPath.row].price != 0 && balance >= 0 {
+            percent = CGFloat(balance) / CGFloat(objectives[indexPath.row].price) * 90.0
         }
         cell.progressBarView.frame.size.width = percent
 
-        if BackendManager.shared.balance.amount >= objectives[indexPath.row].price {
+        if balance >= objectives[indexPath.row].price {
             cell.balanceLabel.textColor = .SMGreen
         } else {
             cell.balanceLabel.textColor = .red

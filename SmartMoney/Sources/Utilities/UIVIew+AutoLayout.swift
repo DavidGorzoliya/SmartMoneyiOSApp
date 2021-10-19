@@ -34,7 +34,6 @@ extension UIView {
         guard let superview = superview else {
             return 
         }
-
         translatesAutoresizingMaskIntoConstraints = false
         centerXAnchor.constraint(equalTo: superview.centerXAnchor).isActive = true
         centerYAnchor.constraint(equalTo: superview.centerYAnchor).isActive = true

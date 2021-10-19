@@ -8,6 +8,24 @@
 import UIKit
 import RealmSwift
 
+protocol StoreProtocol {
+    associatedtype DataType
+
+    var item: DataType { get set }
+    var items: [DataType] { get set }
+    func addItem(item: DataType)
+}
+
+struct Lenta: StoreProtocol {
+    var item: String
+
+    var items: [String]
+
+    func addItem(item: String) {
+
+    }
+}
+
 class MainTabBarController: UITabBarController {
 
     override func viewDidLoad() {

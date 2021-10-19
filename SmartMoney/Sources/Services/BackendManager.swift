@@ -4,9 +4,6 @@
 //
 //  Created by Давид Горзолия on 8/15/21.
 //
-
-// cmd + shift + O open file
-
 import Foundation
 import RealmSwift
 

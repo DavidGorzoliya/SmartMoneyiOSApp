@@ -7,14 +7,14 @@
 
 import UIKit
 
-class BalanceViewController: UIViewController {
+final class BalanceViewController: UIViewController {
 
-    enum OperationType {
+    private enum OperationType {
         case add
         case subtract
     }
 
-    var balanceView: BalanceView {
+    private var balanceView: BalanceView {
         return view as! BalanceView
     }
 
@@ -45,16 +45,24 @@ class BalanceViewController: UIViewController {
         view.backgroundColor = .white
         title = String(balance)
 
-        navigationController?.navigationBar.prefersLargeTitles = true
-
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(onAddToBalance))
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image:UIImage(systemName: "minus"), style: .plain, target: self, action: #selector(onSubtractFromBalance))
+        setUpNavigationBar()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         balanceAdultPiggyBank = BackendManager.shared.balanceAdultPiggyBank.amount
         balanceKidPiggyBank = BackendManager.shared.balanceKidPiggyBank.amount
+    }
+
+    private func setUpNavigationBar() {
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add,
+                                                            target: self,
+                                                            action: #selector(onAddToBalance))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "minus"),
+                                                           style: .plain,
+                                                           target: self,
+                                                           action: #selector(onSubtractFromBalance))
     }
 
     @objc private func onAddToBalance() {
@@ -69,7 +77,7 @@ class BalanceViewController: UIViewController {
         let alertController = UIAlertController.makeSMAlertController(title: "Write the amount")
         alertController.addTextField { $0.keyboardType = .numberPad }
 
-        let addToBalanceAction = UIAlertAction(title: "Done", style: .default) { [unowned alertController] _ in
+        let addToBalanceAction = UIAlertAction(title: "Done", style: .default) { _ in
 
             guard let textFields = alertController.textFields,
                   let amountTextField = textFields.first,
